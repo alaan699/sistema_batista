@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 13:12:01 by Hibernate Tools 4.3.1
+// Generated 18/09/2023 17:08:34 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,13 +33,13 @@ public class AcsCliente  implements java.io.Serializable {
      private String acsNacionalidade;
      private String acsCelular;
      private int acsEstadoCivil;
-     private int acsSexo;
+     private String acsSexo;
 
     public AcsCliente() {
     }
 
 	
-    public AcsCliente(int acsIdcliente, String acsNome, String acsCpf, String acsRg, String acsEmail, String acsCep, String acsEndereco, String acsCidade, int acsNumeroCasa, String acsNacionalidade, String acsCelular, int acsEstadoCivil, int acsSexo) {
+    public AcsCliente(int acsIdcliente, String acsNome, String acsCpf, String acsRg, String acsEmail, String acsCep, String acsEndereco, String acsCidade, int acsNumeroCasa, String acsNacionalidade, String acsCelular, int acsEstadoCivil, String acsSexo) {
         this.acsIdcliente = acsIdcliente;
         this.acsNome = acsNome;
         this.acsCpf = acsCpf;
@@ -54,7 +54,7 @@ public class AcsCliente  implements java.io.Serializable {
         this.acsEstadoCivil = acsEstadoCivil;
         this.acsSexo = acsSexo;
     }
-    public AcsCliente(int acsIdcliente, String acsNome, String acsCpf, String acsRg, Date acsDataNasc, String acsEmail, String acsCep, String acsEndereco, String acsCidade, int acsNumeroCasa, String acsNacionalidade, String acsCelular, int acsEstadoCivil, int acsSexo) {
+    public AcsCliente(int acsIdcliente, String acsNome, String acsCpf, String acsRg, Date acsDataNasc, String acsEmail, String acsCep, String acsEndereco, String acsCidade, int acsNumeroCasa, String acsNacionalidade, String acsCelular, int acsEstadoCivil, String acsSexo) {
        this.acsIdcliente = acsIdcliente;
        this.acsNome = acsNome;
        this.acsCpf = acsCpf;
@@ -204,12 +204,12 @@ public class AcsCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="acs_sexo", nullable=false)
-    public int getAcsSexo() {
+    @Column(name="acs_sexo", nullable=false, length=30)
+    public String getAcsSexo() {
         return this.acsSexo;
     }
     
-    public void setAcsSexo(int acsSexo) {
+    public void setAcsSexo(String acsSexo) {
         this.acsSexo = acsSexo;
     }
 

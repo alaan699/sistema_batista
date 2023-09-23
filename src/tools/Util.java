@@ -26,7 +26,7 @@ public class Util {
 
     }
 
-    public static void limpaCampos(JComponent... vetComp) {
+    public static void LimparCampos(JComponent... vetComp) {
         for (JComponent componente : vetComp) {
             if (componente instanceof JTextField) {
                 ((JTextField) componente).setText("");
@@ -57,22 +57,22 @@ public class Util {
             }
 
             public static String intStr(int num) {
-            return"";
+            return String.valueOf(num);
             }
             
-             public static int strDouble(String cad){
-                return 0;
+            public static int strDouble(String cad){
+            return 0;
             }
 
             public static String doubleStr(double num) {
-            return"";
+            return "";
             }
             
-             public static Date strDate(String data){
-                return null;
+            public static Date strDate(String cad){
+            return null;
             }
 
-            public static Date dateStr(int num) {
+            public static String dateStr(int num) {
             return null;
             }
     }

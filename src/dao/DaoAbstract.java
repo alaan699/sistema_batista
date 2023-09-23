@@ -9,14 +9,17 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
+import java.util.ArrayList;
+
+
 
 /**
  *
- * @author u08004655122
+ * @author u09564875137
  */
 public abstract class DaoAbstract {
     
-    Session session;
+    public Session session;
     
     public DaoAbstract() {
       SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
