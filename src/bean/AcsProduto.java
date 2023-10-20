@@ -24,7 +24,7 @@ public class AcsProduto  implements java.io.Serializable {
      private String acsAcompanhamento;
      private String acsIngredientes;
      private int acsTempopreparo;
-     private short acsCategoria;
+     private int acsCategoria;
      private double acsAvaliacao;
      private String acsPeso;
      private int acsQuantidadepessoas;
@@ -32,7 +32,7 @@ public class AcsProduto  implements java.io.Serializable {
     public AcsProduto() {
     }
 
-    public AcsProduto(int acsIdproduto, String acsNome, String acsDescricao, double acsPreco, String acsAcompanhamento, String acsIngredientes, int acsTempopreparo, short acsCategoria, double acsAvaliacao, String acsPeso, int acsQuantidadepessoas) {
+    public AcsProduto(int acsIdproduto, String acsNome, String acsDescricao, double acsPreco, String acsAcompanhamento, String acsIngredientes, int acsTempopreparo, int acsCategoria, double acsAvaliacao, String acsPeso, int acsQuantidadepessoas) {
        this.acsIdproduto = acsIdproduto;
        this.acsNome = acsNome;
        this.acsDescricao = acsDescricao;
@@ -120,11 +120,11 @@ public class AcsProduto  implements java.io.Serializable {
 
     
     @Column(name="acs_categoria", nullable=false)
-    public short getAcsCategoria() {
+    public int getAcsCategoria() {
         return this.acsCategoria;
     }
     
-    public void setAcsCategoria(short acsCategoria) {
+    public void setAcsCategoria(int acsCategoria) {
         this.acsCategoria = acsCategoria;
     }
 

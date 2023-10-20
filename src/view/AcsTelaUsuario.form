@@ -72,19 +72,19 @@
                   </Group>
                   <Component id="acs_jTxtcodigo" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="acs_jBtnincluir" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="acs_jBtnalterar" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="acs_jBtnalterar" max="32767" attributes="0"/>
+                          <Component id="acs_jBtnincluir" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="78" max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="acs_jBtnpesquisar" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="acs_jBtnconfirmar" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="acs_jBtnpesquisar" min="-2" pref="127" max="-2" attributes="0"/>
+                          <Component id="acs_jBtnconfirmar" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="acs_jBtncancelar" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="acs_jBtnexcluir" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="acs_jBtnexcluir" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Component id="acs_jBtncancelar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -143,7 +143,7 @@
                   <Component id="acs_jBtnconfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="acs_jBtncancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,6 +155,9 @@
           <Font name="Verdana" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-usu&#xe1;rio-masculino-20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Usuario"/>
       </Properties>
     </Component>
@@ -215,11 +218,12 @@
     <Component class="javax.swing.JComboBox" name="acs_jCbonivel">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Nivel 1"/>
+            <StringItem index="1" value="Nivel 2"/>
+            <StringItem index="2" value="Nivel 3"/>
+            <StringItem index="3" value="Nivel 4"/>
+            <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -247,6 +251,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="acs_jBtnincluir">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-mais-20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="INCLUIR"/>
       </Properties>
       <Events>
@@ -255,6 +262,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="acs_jBtnalterar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-editar-20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="ALTERAR"/>
       </Properties>
       <Events>
@@ -263,6 +273,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="acs_jBtnconfirmar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-selecionado-20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="CONFIRMAR"/>
       </Properties>
       <Events>
@@ -271,12 +284,21 @@
     </Component>
     <Component class="javax.swing.JButton" name="acs_jBtnpesquisar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-pesquisar-20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="PESQUISAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acs_jBtnpesquisarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="acs_jBtnexcluir">
       <Properties>
-        <Property name="text" type="java.lang.String" value="EDITAR"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-lixo-20.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="EXCLUIR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acs_jBtnexcluirActionPerformed"/>
@@ -284,6 +306,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="acs_jBtncancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/icons8-excluir-20.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="CANCELAR"/>
       </Properties>
       <Events>

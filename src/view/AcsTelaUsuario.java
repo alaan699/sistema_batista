@@ -10,8 +10,6 @@ import dao.DaoUsuario;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import tools.Util;
@@ -31,15 +29,13 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
     public AcsTelaUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        setTitle("Usuários");
+        setLocationRelativeTo(null);
         DaoUsuario = new DaoUsuario();
 
-        Util.habilitar(false, acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
-                acs_jPwfsenha, acs_jCbonivel, acs_jChbativo, acs_jBtncancelar, acs_jBtnconfirmar);
+        Util.habilitar(false, acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,acs_jPwfsenha, acs_jCbonivel, acs_jChbativo, acs_jBtncancelar, acs_jBtnconfirmar);
             Util.habilitar(true, acs_jBtnincluir, acs_jBtnalterar, acs_jBtnexcluir, acs_jBtnpesquisar);
 
-        setTitle("Cadastro de usuários");
-        setLocationRelativeTo(null);
         try {
             mascaraCPF = new MaskFormatter("###.###.###-##");
             mascaraData = new MaskFormatter("##/##/####");
@@ -51,25 +47,42 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
 
     }
 
-    public AcsUsuario viewBean() {
-        AcsUsuario usuarios = new AcsUsuario();
-        usuarios.setAcsIdusuario(Util.strInt(acs_jTxtcodigo.getText()));
-        usuarios.setAcsNome(acs_jTxtnome.getText());
-        usuarios.setAcsApelido(acs_jTxtapelido.getText());
-        usuarios.setAcsCpf(acs_jFmtcpf.getText());
-        usuarios.setAcsDataNasc(acs_jFmtdata.getText());
-        usuarios.setAcsSenha(acs_jPwfsenha.getText());
-        usuarios.setAcsNivel(acs_jCbonivel.getSelectedIndex());
-        usuarios.setAcsAtivo( acs_jChbativo.isSelected() == true ? "S" : "N");
+     public AcsUsuario ViewBean() {
+        AcsUsuario acsusuario = new AcsUsuario();
         
-       if (acs_jChbativo.isSelected() == true) {
-           usuarios.setAcsAtivo("S");
+        
+        acsusuario.setAcsIdusuario(Util.strInt(acs_jTxtcodigo.getText()));
+        acsusuario.setAcsNome(acs_jTxtnome.getText());
+        acsusuario.setAcsApelido(acs_jTxtapelido.getText());
+        acsusuario.setAcsCpf(acs_jFmtcpf.getText());
+        acsusuario.setAcsDataNasc(acs_jFmtdata.getText());
+        acsusuario.setAcsSenha(acs_jPwfsenha.getText());
+        acsusuario.setAcsNivel(acs_jCbonivel.getSelectedIndex());
+        
+        if(acs_jChbativo.isSelected()==true){
+        acsusuario.setAcsAtivo("S");
+        }else{
+        acsusuario.setAcsAtivo("N");
+        }    
+        return acsusuario;
+     }
+     
+     public void beanView(AcsUsuario acsusuario){
+        String valor = String.valueOf(acsusuario.getAcsIdusuario());
+        acs_jTxtcodigo.setText(valor);
+        acs_jTxtnome.setText(acsusuario.getAcsNome());
+        acs_jTxtapelido.setText(acsusuario.getAcsApelido());
+        acs_jFmtcpf.setText(acsusuario.getAcsCpf());
+        acs_jFmtdata.setText(acsusuario.getAcsDataNasc());  
+        acs_jPwfsenha.setText(acsusuario.getAcsSenha());
+        acs_jCbonivel.setSelectedIndex(acsusuario.getAcsNivel());
+        if ( acsusuario.getAcsAtivo().equals("S") == true){
+           acs_jChbativo.setSelected(true);
         } else {
-            usuarios.setAcsAtivo("N");
-       }
-        return usuarios;
+        acs_jChbativo.setSelected(false);    
+        }
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,6 +123,7 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-usuário-masculino-20.png"))); // NOI18N
         jLabel1.setText("Usuario");
 
         jLabel2.setText("CODIGO");
@@ -147,7 +161,7 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
             }
         });
 
-        acs_jCbonivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        acs_jCbonivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4", " " }));
         acs_jCbonivel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acs_jCbonivelActionPerformed(evt);
@@ -164,6 +178,7 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
             }
         });
 
+        acs_jBtnincluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-mais-20.png"))); // NOI18N
         acs_jBtnincluir.setText("INCLUIR");
         acs_jBtnincluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +186,7 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
             }
         });
 
+        acs_jBtnalterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-editar-20.png"))); // NOI18N
         acs_jBtnalterar.setText("ALTERAR");
         acs_jBtnalterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +194,7 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
             }
         });
 
+        acs_jBtnconfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-selecionado-20.png"))); // NOI18N
         acs_jBtnconfirmar.setText("CONFIRMAR");
         acs_jBtnconfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,15 +202,23 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
             }
         });
 
+        acs_jBtnpesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-pesquisar-20.png"))); // NOI18N
         acs_jBtnpesquisar.setText("PESQUISAR");
+        acs_jBtnpesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acs_jBtnpesquisarActionPerformed(evt);
+            }
+        });
 
-        acs_jBtnexcluir.setText("EDITAR");
+        acs_jBtnexcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-lixo-20.png"))); // NOI18N
+        acs_jBtnexcluir.setText("EXCLUIR");
         acs_jBtnexcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acs_jBtnexcluirActionPerformed(evt);
             }
         });
 
+        acs_jBtncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-excluir-20.png"))); // NOI18N
         acs_jBtncancelar.setText("CANCELAR");
         acs_jBtncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,17 +265,17 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
                                 .addComponent(acs_jCbonivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(acs_jTxtcodigo)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(acs_jBtnalterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(acs_jBtnincluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(acs_jBtnincluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(acs_jBtnalterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                            .addComponent(acs_jBtnpesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(acs_jBtnconfirmar))
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(acs_jBtnpesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(acs_jBtnconfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(acs_jBtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(acs_jBtnexcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(acs_jBtnexcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(acs_jBtncancelar))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -298,7 +323,7 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
                     .addComponent(acs_jBtnalterar)
                     .addComponent(acs_jBtnconfirmar)
                     .addComponent(acs_jBtncancelar))
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         pack();
@@ -332,23 +357,26 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
         Util.habilitar(true, acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
                 acs_jPwfsenha, acs_jCbonivel, acs_jChbativo, acs_jBtncancelar, acs_jBtnconfirmar);
         Util.habilitar(false, acs_jBtnincluir, acs_jBtnalterar, acs_jBtnexcluir, acs_jBtnexcluir);
-        Util.LimparCampos(acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
+        Util.limparCampos(acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
                 acs_jPwfsenha, acs_jCbonivel, acs_jChbativo);
         incluindo = true;
 
     }//GEN-LAST:event_acs_jBtnincluirActionPerformed
 
     private void acs_jBtnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnexcluirActionPerformed
-        if (Util.perguntar("Deseja excluir o registro?") == true) {
-            usuarios = viewBean();
-            DaoUsuario.delete(usuarios);
-        } else {
 
-            Util.mensagem("Exclusão cancelada.");
-        }
+        Util.habilitar(true, acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata, acs_jPwfsenha, acs_jChbativo, acs_jCbonivel, acs_jBtncancelar, acs_jBtnconfirmar);
+        Util.habilitar(false, acs_jBtnincluir, acs_jBtnalterar, acs_jBtnexcluir, acs_jBtnpesquisar);
 
-        Util.LimparCampos(acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
-                acs_jPwfsenha, acs_jCbonivel, acs_jChbativo);
+        if (Util.perguntar("Deseja excluir o projeto?") == true){
+            AcsUsuario usuario = ViewBean();
+            DaoUsuario usuarioDAO = new DaoUsuario();
+            usuarioDAO.delete(usuario);
+       }else {
+                Util.mensagem("Exclusão cancelada.");
+                }  
+     Util.limparCampos(acs_jTxtcodigo,acs_jTxtapelido, acs_jFmtcpf,acs_jTxtnome, acs_jFmtdata, acs_jPwfsenha, acs_jCbonivel, acs_jChbativo);
+    
     }//GEN-LAST:event_acs_jBtnexcluirActionPerformed
 
     private void acs_jBtnalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnalterarActionPerformed
@@ -359,26 +387,37 @@ public class AcsTelaUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_acs_jBtnalterarActionPerformed
 
     private void acs_jBtnconfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnconfirmarActionPerformed
-        usuarios = viewBean();        
-        if (incluindo == true) {
-            DaoUsuario.insert(usuarios);
-        } else {
-            DaoUsuario.update(usuarios);
-        }                
-        
-        Util.habilitar(false, acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
-                acs_jPwfsenha, acs_jCbonivel, acs_jChbativo, acs_jBtncancelar, acs_jBtnconfirmar);
-        Util.habilitar(true, acs_jBtnincluir, acs_jBtnalterar, acs_jBtnexcluir, acs_jBtnexcluir);
+        Util.habilitar(false, acs_jTxtcodigo,acs_jTxtapelido,acs_jTxtnome,acs_jFmtcpf,acs_jFmtdata,acs_jPwfsenha,acs_jCbonivel, acs_jChbativo, acs_jBtncancelar, acs_jBtnconfirmar );
+        Util.habilitar(true, acs_jBtnalterar, acs_jBtnincluir, acs_jBtnpesquisar, acs_jBtnexcluir);
+      
 
+        
+        AcsUsuario acsusuario = ViewBean();
+        DaoUsuario daousuario = new DaoUsuario();
+        
+        if (incluindo == true) {
+            daousuario.insert(acsusuario);
+        } else {
+            daousuario.update(acsusuario);
+        }
+         Util.limparCampos(acs_jTxtcodigo,acs_jTxtapelido, acs_jFmtcpf,acs_jTxtnome, acs_jFmtdata, acs_jPwfsenha, acs_jCbonivel, acs_jChbativo);                                                
     }//GEN-LAST:event_acs_jBtnconfirmarActionPerformed
 
     private void acs_jBtncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtncancelarActionPerformed
         Util.habilitar(false, acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
                 acs_jPwfsenha, acs_jCbonivel, acs_jChbativo, acs_jBtncancelar, acs_jBtnconfirmar);
         Util.habilitar(true, acs_jBtnincluir, acs_jBtnalterar, acs_jBtnexcluir, acs_jBtnexcluir);
-        Util.LimparCampos(acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
+        Util.limparCampos(acs_jTxtcodigo, acs_jTxtnome, acs_jTxtapelido, acs_jFmtcpf, acs_jFmtdata,
                 acs_jPwfsenha, acs_jCbonivel, acs_jChbativo);
     }//GEN-LAST:event_acs_jBtncancelarActionPerformed
+
+    private void acs_jBtnpesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnpesquisarActionPerformed
+        Util.limparCampos(acs_jTxtcodigo,acs_jTxtapelido, acs_jFmtcpf,acs_jTxtnome, acs_jFmtdata, acs_jPwfsenha, acs_jCbonivel, acs_jChbativo);
+        AcsTelaUsuarioPesquisar acsTelaUsuarioPesquisar = new AcsTelaUsuarioPesquisar(null, true);
+        acsTelaUsuarioPesquisar.setTelaAnterior(this);
+        acsTelaUsuarioPesquisar.setVisible(true);
+        
+    }//GEN-LAST:event_acs_jBtnpesquisarActionPerformed
 
     /**
      * @param args the command line arguments

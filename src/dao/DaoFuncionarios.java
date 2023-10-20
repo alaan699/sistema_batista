@@ -5,6 +5,8 @@
  */
 package dao;
 
+import bean.AcsFuncionario;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -17,9 +19,9 @@ public class DaoFuncionarios extends DaoAbstract {
 
     @Override
     public void insert(Object object) {
-       session.beginTransaction(); //nao precisa flush e clear pq está mandando uma informacao nova. ja no up e delt ta pegando uma informação ja existente
+       session.beginTransaction(); 
        session.save(object);
-       session.getTransaction().commit(); //todas as operacoes com banco de dados precisam de transacao com hibernate
+       session.getTransaction().commit(); 
     }
 
     @Override
@@ -34,7 +36,7 @@ public class DaoFuncionarios extends DaoAbstract {
     @Override
     public void delete(Object object) {
        session.beginTransaction();
-       session.flush(); //porque vai limpar o cash do hiberenate pra ele não gravar coisas erradas
+       session.flush(); 
        session.clear();
        session.delete(object);
        session.getTransaction().commit();
@@ -43,20 +45,20 @@ public class DaoFuncionarios extends DaoAbstract {
     @Override
     public Object list(int id) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(DaoFuncionarios.class); //importar do bean e do hibernate; criteria é pra fazer select * from na O.O
-        criteria.add(Restrictions.eq("idFuncionario", id)); //é um método estático; id é o parametro da linha 46
+        Criteria criteria = session.createCriteria(AcsFuncionario.class); 
+        criteria.add(Restrictions.eq("id", id)); 
         List lista = criteria.list();
         session.getTransaction().commit();
-        return lista; //registros no java sao transformados em bean; nao precisa do array pq mudou na linha 50 só pra list
+        return(ArrayList) lista; 
     }
 
     @Override
     public List listAll() {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(DaoFuncionarios.class); //importar do bean e do hibernate; criteria é pra fazer select * from na O.O
+        Criteria criteria = session.createCriteria(AcsFuncionario.class); 
         List lista = criteria.list();
         session.getTransaction().commit();
-        return lista; //registros no java sao transformados em bean; nao precisa do array pq mudou na linha 50 só pra list
+        return(ArrayList) lista; 
     }
     
 }

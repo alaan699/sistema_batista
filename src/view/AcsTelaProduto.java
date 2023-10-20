@@ -5,18 +5,36 @@
  */
 package view;
 
+import bean.AcsProduto;
+import dao.DaoProduto;
+import tools.Util;
+import java.util.List;
+
 /**
  *
  * @author ENTERPRISE
  */
 public class AcsTelaProduto extends javax.swing.JDialog {
-
+    boolean incluindo;
+    DaoProduto daoproduto; 
+    AcsProduto acsproduto;
+    ProdutoControle produtocontrole;
+    AcsTelaProdutoIA acstelaprodutoia;
     /**
      * Creates new form AcsTelaFuncionario
      */
     public AcsTelaProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Cadastro de produto");
+        setLocationRelativeTo(null);
+        acstelaprodutoia = new AcsTelaProdutoIA(null, true);
+        daoproduto = new DaoProduto();
+        produtocontrole = new ProdutoControle();
+        List lista = daoproduto.listAll();
+        produtocontrole.setList(lista);
+        jTable1.setModel(produtocontrole);
+
     }
 
     /**
@@ -37,6 +55,7 @@ public class AcsTelaProduto extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -51,18 +70,27 @@ public class AcsTelaProduto extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-20.png"))); // NOI18N
         jLabel1.setText("PRODUTO");
 
+        acs_jBtnexcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-lixo-20.png"))); // NOI18N
         acs_jBtnexcluir.setText("EXCLUIR");
-
-        acs_jBtnalterar.setText("ALTERAR");
-        acs_jBtnalterar.addActionListener(new java.awt.event.ActionListener() {
+        acs_jBtnexcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acs_jBtnalterarActionPerformed(evt);
+                acs_jBtnexcluirActionPerformed(evt);
             }
         });
 
+        acs_jBtnalterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-editar-20.png"))); // NOI18N
+        acs_jBtnalterar.setText("ALTERAR");
+
+        acs_jBtnincluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-mais-20.png"))); // NOI18N
         acs_jBtnincluir.setText("INCLUIR");
+        acs_jBtnincluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acs_jBtnincluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,11 +100,11 @@ public class AcsTelaProduto extends javax.swing.JDialog {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(acs_jBtnincluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(acs_jBtnincluir)
+                        .addGap(73, 73, 73)
+                        .addComponent(acs_jBtnalterar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(acs_jBtnalterar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
-                        .addComponent(acs_jBtnexcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(acs_jBtnexcluir))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -96,15 +124,32 @@ public class AcsTelaProduto extends javax.swing.JDialog {
                     .addComponent(acs_jBtnexcluir)
                     .addComponent(acs_jBtnalterar)
                     .addComponent(acs_jBtnincluir))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void acs_jBtnalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnalterarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_acs_jBtnalterarActionPerformed
+    private void acs_jBtnincluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnincluirActionPerformed
+       incluindo = true;
+        
+       acstelaprodutoia.setTitle("Incluir");
+       acstelaprodutoia.setVisible(true);  
+        
+    }//GEN-LAST:event_acs_jBtnincluirActionPerformed
+
+    private void acs_jBtnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnexcluirActionPerformed
+        if (Util.perguntar("Deseja excluir este produto?") == true){
+            int sel = jTable1.getSelectedRow();
+            AcsProduto acsProduto = produtocontrole.getBean(sel);
+            daoproduto.delete(acsProduto);
+            List lista = daoproduto.listAll();
+            produtocontrole.setList(lista);
+            Util.mensagem("Exclusão Concluída");
+        } else{
+            Util.mensagem("Exclusão cancelada");
+        }
+    }//GEN-LAST:event_acs_jBtnexcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +176,20 @@ public class AcsTelaProduto extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AcsTelaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

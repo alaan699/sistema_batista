@@ -5,19 +5,65 @@
  */
 package view;
 
+import bean.AcsFuncionario;
+import dao.DaoFuncionarios;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
+
 /**
  *
  * @author ENTERPRISE
  */
 public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
 
+    private boolean incluindo;
+    MaskFormatter mascaraCPF;
+    public AcsFuncionario funcionario;
+    public DaoFuncionarios DaoFuncionarios;
+    
     /**
      * Creates new form AcsTelaFuncionarioIA
+     * @param parent
+     * @param modal
      */
     public AcsTelaFuncionarioIA(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+       super(parent, modal);
         initComponents();
+        setTitle("Funcionários");
+        setLocationRelativeTo(null);
+        DaoFuncionarios = new DaoFuncionarios();
+        try {
+            mascaraCPF = new MaskFormatter("###.###.###-##");
+        } catch (ParseException ex) {
+            Logger.getLogger(AcsTelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        acs_jFmtcpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));  
     }
+    
+         public AcsFuncionario ViewBean() {
+        AcsFuncionario acsfuncionario = new AcsFuncionario();
+        
+        
+        acsfuncionario.setAcsIdfuncionario(Util.strInt(acs_jTxtcodigo.getText()));
+        acsfuncionario.setAcsNome(acs_jTxtnome.getText());
+        acsfuncionario.setAcsCpf(acs_jFmtcpf.getText());
+        acsfuncionario.setAcsEndereco(acs_jTxtendereco.getText());
+        acsfuncionario.setAcsFuncao(acs_jTxtfuncao.getText());
+        return acsfuncionario;
+     }
+         
+        public void beanView(AcsFuncionario acsfuncionario){
+        String valor = String.valueOf(acsfuncionario.getAcsIdfuncionario());
+        acs_jTxtcodigo.setText(valor);        
+        acs_jTxtnome.setText(acsfuncionario.getAcsNome());
+        acs_jFmtcpf.setText(acsfuncionario.getAcsCpf());
+        acs_jTxtendereco.setText(acsfuncionario.getAcsEndereco());
+        acs_jTxtfuncao.setText(acsfuncionario.getAcsFuncao());
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,17 +82,18 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         acs_jFmtcpf = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        acs_jCbofuncao = new javax.swing.JComboBox<>();
         acs_jTxtnome = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         acs_jBtnconfirmar = new javax.swing.JButton();
         acs_jBtncancelar = new javax.swing.JButton();
+        acs_jTxtfuncao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Funcionário");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-de-ferramentas-20.png"))); // NOI18N
+        jLabel1.setText("FUNCIONÁRIO");
 
         jLabel2.setText("CODIGO");
 
@@ -68,8 +115,6 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
 
         jLabel6.setText("FUNÇÃO");
 
-        acs_jCbofuncao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cozinheiro", "Garçom", "Gerente", "Caixa", "Bartender", " " }));
-
         acs_jTxtnome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acs_jTxtnomeActionPerformed(evt);
@@ -78,8 +123,15 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
 
         jLabel8.setText("NOME");
 
+        acs_jBtnconfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-selecionado-20.png"))); // NOI18N
         acs_jBtnconfirmar.setText("CONFIRMAR");
+        acs_jBtnconfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acs_jBtnconfirmarActionPerformed(evt);
+            }
+        });
 
+        acs_jBtncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-excluir-20.png"))); // NOI18N
         acs_jBtncancelar.setText("CANCELAR");
         acs_jBtncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,39 +144,34 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(acs_jTxtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(acs_jTxtendereco, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addComponent(acs_jFmtcpf))
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4)
+                                .addComponent(acs_jTxtendereco, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addComponent(acs_jFmtcpf)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(acs_jBtnconfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
-                                .addComponent(acs_jBtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(acs_jTxtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(acs_jCbofuncao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(50, 50, 50))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(acs_jTxtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(acs_jTxtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(acs_jBtnconfirmar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(acs_jBtncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(acs_jTxtfuncao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 61, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +179,9 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(acs_jTxtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(acs_jCbofuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(acs_jTxtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -151,11 +194,15 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(acs_jFmtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(acs_jTxtfuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(acs_jBtnconfirmar)
                     .addComponent(acs_jBtncancelar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -174,8 +221,20 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
     }//GEN-LAST:event_acs_jTxtnomeActionPerformed
 
     private void acs_jBtncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtncancelarActionPerformed
-        // TODO add your handling code here:
+        Util.mensagem("Inclusão Cancelada");
+        setVisible(false);
     }//GEN-LAST:event_acs_jBtncancelarActionPerformed
+
+    private void acs_jBtnconfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnconfirmarActionPerformed
+        AcsFuncionario acsfuncionario = ViewBean();
+        DaoFuncionarios daofuncionario = new DaoFuncionarios();
+        daofuncionario.insert(acsfuncionario);
+
+         Util.limparCampos(acs_jTxtcodigo, acs_jFmtcpf,acs_jTxtnome, acs_jTxtendereco, acs_jTxtfuncao); 
+         Util.mensagem("Funcionario Cadastrado");
+         setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acs_jBtnconfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,10 +281,10 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acs_jBtncancelar;
     private javax.swing.JButton acs_jBtnconfirmar;
-    private javax.swing.JComboBox<String> acs_jCbofuncao;
     private javax.swing.JFormattedTextField acs_jFmtcpf;
     private javax.swing.JTextField acs_jTxtcodigo;
     private javax.swing.JTextField acs_jTxtendereco;
+    private javax.swing.JTextField acs_jTxtfuncao;
     private javax.swing.JTextField acs_jTxtnome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

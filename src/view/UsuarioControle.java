@@ -18,12 +18,10 @@ public class UsuarioControle extends AbstractTableModel {
     
     public void setList(List lista) {
         this.lista = lista;
-        this.fireTableDataChanged();
     }
 
-    
-    public AcsUsuario getBean(int row) {
-        return (AcsUsuario) lista.get(row);
+    public AcsUsuario getBean(int linha) {
+        return (AcsUsuario) lista.get(linha);
     }
     
     @Override
