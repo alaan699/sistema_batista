@@ -230,7 +230,7 @@ public class AcsTelaCliente extends javax.swing.JDialog {
 
         jLabel14.setText("ESTADO CIVÍL");
 
-        acs_jCboestadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro", "Casado", "Divorciado", "Viúvo", "União Estável" }));
+        acs_jCboestadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Divorciado(a)", "Viúvo(a)", "União Estável" }));
         acs_jCboestadocivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acs_jCboestadocivilActionPerformed(evt);

@@ -301,7 +301,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PESO"/>
+        <Property name="text" type="java.lang.String" value="PESO(G)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="acs_jTxtpeso">

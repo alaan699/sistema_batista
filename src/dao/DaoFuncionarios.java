@@ -60,6 +60,34 @@ public class DaoFuncionarios extends DaoAbstract {
         session.getTransaction().commit();
         return(ArrayList) lista; 
     }
+    public List listCpf(String Cpf) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsFuncionario.class);
+        criteria.add(Restrictions.like("acsCpf", "%" + Cpf+ "%"));
+        List results = criteria.list();
+        session.getTransaction().commit();  
+        return results;
+     }    
+    public List listFuncaoCpf(String Funcao, String Cpf) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsFuncionario.class);
+        criteria.add(Restrictions.like("acsFuncao", "%" + Funcao+ "%"));        
+        criteria.add(Restrictions.like("acsCpf", "%" + Cpf+ "%"));
+
+        List results = criteria.list();
+        session.getTransaction().commit();
+        return results;
+    }
+    public List listFuncao(String Funcao) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsFuncionario.class);
+        criteria.add(Restrictions.like("acsFuncao", "%" + Funcao+ "%"));
+        List results = criteria.list();
+        session.getTransaction().commit();
+        return results;
+    
+    
+    }
     
 }
 

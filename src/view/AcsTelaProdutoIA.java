@@ -27,6 +27,8 @@ public class AcsTelaProdutoIA extends javax.swing.JDialog {
         initComponents();
         setTitle("Incluir Produtos");
         setLocationRelativeTo(null);
+
+    
     }
     public AcsProduto ViewBean() {
         AcsProduto acsproduto = new AcsProduto();
@@ -148,7 +150,7 @@ public class AcsTelaProdutoIA extends javax.swing.JDialog {
 
         jLabel10.setText("AVALIAÇÃO");
 
-        jLabel11.setText("PESO");
+        jLabel11.setText("PESO(G)");
 
         jLabel12.setText("PESSOAS");
 

@@ -60,6 +60,34 @@ public class DaoProduto extends DaoAbstract {
         session.getTransaction().commit();
         return(ArrayList) lista; 
     }
+        public List listPeso(String peso) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsProduto.class);
+        criteria.add(Restrictions.like("acsPeso", "%" + peso+ "%"));
+        List results = criteria.list();
+        session.getTransaction().commit();
+        return results;
+    }
+    public List listTempopreparo(int Tempopreparo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsProduto.class);
+        criteria.add(Restrictions.eq("acsTempopreparo", Tempopreparo));
+        List results = criteria.list();
+        session.getTransaction().commit();  
+        return results;
+     }    
+    public List listPesoTempopreparo(String peso, int Tempopreparo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsProduto.class);
+        criteria.add(Restrictions.like("acsPeso", "%" + peso + "%"));
+        criteria.add(Restrictions.eq("acsTempopreparo", Tempopreparo));
+
+        List results = criteria.list();
+        session.getTransaction().commit();
+        return results;
+    
+    
+}
     
 }
 

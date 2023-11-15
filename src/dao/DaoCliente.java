@@ -59,5 +59,35 @@ public class DaoCliente extends DaoAbstract {
         session.getTransaction().commit();
         return lista; 
     }
+        public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsCliente.class);
+        criteria.add(Restrictions.like("acsNome", "%" + nome+ "%"));
+        List results = criteria.list();
+        session.getTransaction().commit();
+        return results;
+    
+    
+    }
+    public List listEstadoCivil(int EstadoCivil) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsCliente.class);
+        criteria.add(Restrictions.eq("acsEstadoCivil", EstadoCivil));
+        List results = criteria.list();
+        session.getTransaction().commit();  
+        return results;
+     }    
+    public List listNomeEstadoCivil(String nome, int EstadoCivil) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsCliente.class);
+        criteria.add(Restrictions.like("acsNome", "%" + nome + "%"));
+        criteria.add(Restrictions.eq("acsEstadoCivil", EstadoCivil));
+
+        List results = criteria.list();
+        session.getTransaction().commit();
+        return results;
+    
+    
+}
     
 }
