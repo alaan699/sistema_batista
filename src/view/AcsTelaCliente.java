@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -153,7 +153,7 @@ public class AcsTelaCliente extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-myspace-20.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-myspace-64.png"))); // NOI18N
         jLabel1.setText("CLIENTE");
 
         jLabel2.setText("CODIGO");
@@ -428,7 +428,7 @@ public class AcsTelaCliente extends javax.swing.JDialog {
                     .addComponent(acs_jBtnconfirmar)
                     .addComponent(acs_jBtnalterar)
                     .addComponent(acs_jbtncancelar))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

@@ -8,6 +8,7 @@ package view;
 import bean.AcsFuncionario;
 import dao.DaoFuncionarios;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -24,6 +25,7 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
     MaskFormatter mascaraCPF;
     public AcsFuncionario funcionario;
     public DaoFuncionarios DaoFuncionarios;
+
     
     /**
      * Creates new form AcsTelaFuncionarioIA
@@ -92,7 +94,7 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-de-ferramentas-20.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-de-ferramentas-64.png"))); // NOI18N
         jLabel1.setText("FUNCIONÁRIO");
 
         jLabel2.setText("CODIGO");
@@ -196,7 +198,7 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
                 .addComponent(acs_jFmtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(acs_jTxtfuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -226,14 +228,17 @@ public class AcsTelaFuncionarioIA extends javax.swing.JDialog {
     }//GEN-LAST:event_acs_jBtncancelarActionPerformed
 
     private void acs_jBtnconfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnconfirmarActionPerformed
-        AcsFuncionario acsfuncionario = ViewBean();
-        DaoFuncionarios daofuncionario = new DaoFuncionarios();
-        daofuncionario.insert(acsfuncionario);
-
-         Util.limparCampos(acs_jTxtcodigo, acs_jFmtcpf,acs_jTxtnome, acs_jTxtendereco, acs_jTxtfuncao); 
-         Util.mensagem("Funcionario Cadastrado");
-         setVisible(false);
-        // TODO add your handling code here:
+        AcsFuncionario acsfuncionario = ViewBean(); 
+         DaoFuncionarios daoFuncionario = new DaoFuncionarios();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+          daoFuncionario.insert(acsfuncionario);
+        } else {            
+          daoFuncionario.update(acsfuncionario);
+        }
+        //controleCategoria.setList(lista);
+        setVisible(false);       
+        
+        Util.limparCampos(acs_jTxtcodigo,acs_jFmtcpf,acs_jTxtendereco,acs_jTxtfuncao,acs_jTxtnome);
     }//GEN-LAST:event_acs_jBtnconfirmarActionPerformed
 
     /**

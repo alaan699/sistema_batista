@@ -15,7 +15,6 @@ import tools.Util;
 public class AcsTelaProdutoIA extends javax.swing.JDialog {
 
     private boolean incluindo;
-    public AcsProduto produto;
     public DaoProduto DaoProduto;
     /**
      * Creates new form AcsTelaPoduto
@@ -109,7 +108,7 @@ public class AcsTelaProdutoIA extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-20.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-64.png"))); // NOI18N
         jLabel1.setText("PRODUTO");
 
         jLabel2.setText("CODIGO");
@@ -281,7 +280,7 @@ public class AcsTelaProdutoIA extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addGap(31, 31, 31)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(acs_jBtconfirmar)
                             .addComponent(acs_jBtncancelar)))
@@ -293,7 +292,7 @@ public class AcsTelaProdutoIA extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(acs_jTxtingredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -317,13 +316,17 @@ public class AcsTelaProdutoIA extends javax.swing.JDialog {
     }//GEN-LAST:event_acs_jBtncancelarActionPerformed
 
     private void acs_jBtconfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtconfirmarActionPerformed
-        AcsProduto acsproduto = ViewBean();
-        DaoProduto daoproduto = new DaoProduto();
-        daoproduto.insert(acsproduto);
-
-         Util.limparCampos(acs_jTxtcodigo, acs_jTxtnome,acs_jFmtpreco,acs_jTxtacompanhamento,acs_jTxtavaliacao,acs_jTxtdescricao,acs_jTxtingredientes,acs_jTxtpeso,acs_jTxtpessoas,acs_jCbotempo,acs_jCbocategoria); 
-         Util.mensagem("Produto Cadastrado");
-         setVisible(false);
+          AcsProduto acsProduto = ViewBean(); 
+          DaoProduto produtoDAO = new DaoProduto();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+            produtoDAO.insert(acsProduto);
+           
+        } else {    
+             produtoDAO.update(acsProduto);
+        }
+        setVisible(false);        
+    
+         Util.limparCampos(acs_jCbocategoria,acs_jCbotempo,acs_jFmtpreco,acs_jTxtacompanhamento,acs_jTxtavaliacao,acs_jTxtcodigo,acs_jTxtdescricao,acs_jTxtingredientes,acs_jTxtnome,acs_jTxtpeso,acs_jTxtpessoas);
     }//GEN-LAST:event_acs_jBtconfirmarActionPerformed
 
     /**

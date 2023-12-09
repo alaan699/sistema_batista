@@ -1,7 +1,10 @@
 package bean;
-// Generated 18/09/2023 17:08:34 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:14:48 by Hibernate Tools 4.3.1
 
 
+
+
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -32,7 +35,21 @@ public class AcsProduto  implements java.io.Serializable {
     public AcsProduto() {
     }
 
+	
     public AcsProduto(int acsIdproduto, String acsNome, String acsDescricao, double acsPreco, String acsAcompanhamento, String acsIngredientes, int acsTempopreparo, int acsCategoria, double acsAvaliacao, String acsPeso, int acsQuantidadepessoas) {
+        this.acsIdproduto = acsIdproduto;
+        this.acsNome = acsNome;
+        this.acsDescricao = acsDescricao;
+        this.acsPreco = acsPreco;
+        this.acsAcompanhamento = acsAcompanhamento;
+        this.acsIngredientes = acsIngredientes;
+        this.acsTempopreparo = acsTempopreparo;
+        this.acsCategoria = acsCategoria;
+        this.acsAvaliacao = acsAvaliacao;
+        this.acsPeso = acsPeso;
+        this.acsQuantidadepessoas = acsQuantidadepessoas;
+    }
+    public AcsProduto(int acsIdproduto, String acsNome, String acsDescricao, double acsPreco, String acsAcompanhamento, String acsIngredientes, int acsTempopreparo, int acsCategoria, double acsAvaliacao, String acsPeso, int acsQuantidadepessoas, Set acsVendasProdutos) {
        this.acsIdproduto = acsIdproduto;
        this.acsNome = acsNome;
        this.acsDescricao = acsDescricao;
@@ -157,9 +174,19 @@ public class AcsProduto  implements java.io.Serializable {
     public void setAcsQuantidadepessoas(int acsQuantidadepessoas) {
         this.acsQuantidadepessoas = acsQuantidadepessoas;
     }
-
-
-
+     @Override
+     public String toString() {
+    return acsNome;
+}
+ @Override
+      public boolean equals (Object object){
+      if(object instanceof AcsProduto){
+      AcsProduto acsProduto = (AcsProduto) object;
+        if(this.getAcsIdproduto()== acsProduto.getAcsIdproduto())
+            return true;
+                }         
+                return false;
+            }
 
 }
 

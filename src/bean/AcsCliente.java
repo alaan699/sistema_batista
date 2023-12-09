@@ -1,8 +1,9 @@
 package bean;
-// Generated 18/09/2023 17:08:34 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:14:48 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -54,7 +55,7 @@ public class AcsCliente  implements java.io.Serializable {
         this.acsEstadoCivil = acsEstadoCivil;
         this.acsSexo = acsSexo;
     }
-    public AcsCliente(int acsIdcliente, String acsNome, String acsCpf, String acsRg, Date acsDataNasc, String acsEmail, String acsCep, String acsEndereco, String acsCidade, int acsNumeroCasa, String acsNacionalidade, String acsCelular, int acsEstadoCivil, String acsSexo) {
+    public AcsCliente(int acsIdcliente, String acsNome, String acsCpf, String acsRg, Date acsDataNasc, String acsEmail, String acsCep, String acsEndereco, String acsCidade, int acsNumeroCasa, String acsNacionalidade, String acsCelular, int acsEstadoCivil, String acsSexo, Set acsVendas) {
        this.acsIdcliente = acsIdcliente;
        this.acsNome = acsNome;
        this.acsCpf = acsCpf;
@@ -212,9 +213,20 @@ public class AcsCliente  implements java.io.Serializable {
     public void setAcsSexo(String acsSexo) {
         this.acsSexo = acsSexo;
     }
-
-
-
+        @Override
+     public String toString() {
+    return acsNome;
+}
+    
+         @Override
+      public boolean equals (Object object){
+      if(object instanceof AcsCliente){
+      AcsCliente acsCliente = (AcsCliente) object;
+        if(this.getAcsIdcliente()== acsCliente.getAcsIdcliente())
+            return true;
+                }         
+                return false;
+      }
 
 }
 

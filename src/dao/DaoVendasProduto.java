@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.AcsVendas;
 import bean.AcsVendasProduto;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,14 @@ public class DaoVendasProduto extends DaoAbstract {
         List lista = criteria.list();
         session.getTransaction().commit();
         return(ArrayList) lista; 
+    }
+        public List listProduto(AcsVendas acsVendas){
+       session.beginTransaction();
+        Criteria criteria = session.createCriteria(AcsVendasProduto.class);
+        criteria.add( Restrictions.eq("acsVendas", acsVendas));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
     
 }

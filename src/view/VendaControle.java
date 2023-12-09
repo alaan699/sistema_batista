@@ -74,7 +74,7 @@ public class VendaControle extends AbstractTableModel {
             return "Funcionario";
         }
         if (columnIndex == 4) {
-            return "Hora Pedido";
+            return "Data";
         }
         return "";
     }

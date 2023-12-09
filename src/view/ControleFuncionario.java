@@ -18,6 +18,7 @@ public class ControleFuncionario extends AbstractTableModel {
     
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     
     public AcsFuncionario getBean(int linha) {

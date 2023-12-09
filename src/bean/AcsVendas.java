@@ -1,11 +1,15 @@
 package bean;
-// Generated 18/09/2023 17:08:34 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:14:48 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,27 +25,27 @@ public class AcsVendas  implements java.io.Serializable {
 
 
      private int acsIdvendas;
-     private int acsCliente;
+     private AcsCliente acsCliente;
+     private AcsFuncionario acsFuncionario;
      private Date acsHorapedido;
-     private String acsValor;
-     private int acsFuncionario;
+     private double acsValor;
 
     public AcsVendas() {
     }
 
 	
-    public AcsVendas(int acsIdvendas, Date acsHorapedido, String acsValor, int acsFuncionario) {
+    public AcsVendas(int acsIdvendas, AcsFuncionario acsFuncionario, Date acsHorapedido, double acsValor) {
         this.acsIdvendas = acsIdvendas;
+        this.acsFuncionario = acsFuncionario;
         this.acsHorapedido = acsHorapedido;
         this.acsValor = acsValor;
-        this.acsFuncionario = acsFuncionario;
     }
-    public AcsVendas(int acsIdvendas, int acsCliente, Date acsHorapedido, String acsValor, int acsFuncionario) {
+    public AcsVendas(int acsIdvendas, AcsCliente acsCliente, AcsFuncionario acsFuncionario, Date acsHorapedido, double acsValor, Set acsVendasProdutos) {
        this.acsIdvendas = acsIdvendas;
        this.acsCliente = acsCliente;
+       this.acsFuncionario = acsFuncionario;
        this.acsHorapedido = acsHorapedido;
        this.acsValor = acsValor;
-       this.acsFuncionario = acsFuncionario;
     }
    
      @Id 
@@ -56,17 +60,27 @@ public class AcsVendas  implements java.io.Serializable {
         this.acsIdvendas = acsIdvendas;
     }
 
-    
-    @Column(name="acs_cliente")
-    public int getAcsCliente() {
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="acs_cliente")
+    public AcsCliente getAcsCliente() {
         return this.acsCliente;
     }
     
-    public void setAcsCliente(int acsCliente) {
+    public void setAcsCliente(AcsCliente acsCliente) {
         this.acsCliente = acsCliente;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="acs_funcionario", nullable=false)
+    public AcsFuncionario getAcsFuncionario() {
+        return this.acsFuncionario;
+    }
+    
+    public void setAcsFuncionario(AcsFuncionario acsFuncionario) {
+        this.acsFuncionario = acsFuncionario;
+    }
+
+    @Temporal(TemporalType.DATE)
     @Column(name="acs_horapedido", nullable=false, length=19)
     public Date getAcsHorapedido() {
         return this.acsHorapedido;
@@ -77,26 +91,14 @@ public class AcsVendas  implements java.io.Serializable {
     }
 
     
-    @Column(name="acs_valor", nullable=false, length=45)
-    public String getAcsValor() {
+    @Column(name="acs_valor", nullable=false)
+    public double getAcsValor() {
         return this.acsValor;
     }
     
-    public void setAcsValor(String acsValor) {
+    public void setAcsValor(double acsValor) {
         this.acsValor = acsValor;
     }
-
-    
-    @Column(name="acs_funcionario", nullable=false)
-    public int getAcsFuncionario() {
-        return this.acsFuncionario;
-    }
-    
-    public void setAcsFuncionario(int acsFuncionario) {
-        this.acsFuncionario = acsFuncionario;
-    }
-
-
 
 
 }

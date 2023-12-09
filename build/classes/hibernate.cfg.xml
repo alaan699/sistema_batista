@@ -45,12 +45,11 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_alan_batista?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"></property>
-    <mapping class="bean.AcsFuncionario"/>
-    <mapping class="bean.AcsUsuario"/>
     <mapping class="bean.AcsCliente"/>
+    <mapping class="bean.AcsUsuario"/>
     <mapping class="bean.AcsProduto"/>
     <mapping class="bean.AcsVendas"/>
     <mapping class="bean.AcsVendasProduto"/>
+    <mapping class="bean.AcsFuncionario"/>
   </session-factory>
 </hibernate-configuration>

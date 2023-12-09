@@ -30,18 +30,25 @@ public class AcsTelaFuncionario extends javax.swing.JDialog {
      * @param modal
      */
     public AcsTelaFuncionario(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+         super(parent, modal);
         initComponents();
-        setTitle("Cadastro de funcionários");
+        setTitle("Funcionario");
         setLocationRelativeTo(null);
-        acsTelaFuncionarioIA = new AcsTelaFuncionarioIA(null, true);
-        daoFuncionario = new DaoFuncionarios();
+        
+       acsTelaFuncionarioIA = new AcsTelaFuncionarioIA(null, true);
         controleFuncionario = new ControleFuncionario();
+        daoFuncionario = new DaoFuncionarios();
         List lista = daoFuncionario.listAll();
         controleFuncionario.setList(lista);
         jTable1.setModel(controleFuncionario);
+        
     }
-
+    
+     public int getSelectedRowProd() {
+        return jTable1.getSelectedRow();
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,8 +82,8 @@ public class AcsTelaFuncionario extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-de-ferramentas-20.png"))); // NOI18N
-        jLabel1.setText("FUNCIONARIO");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-caixa-de-ferramentas-64.png"))); // NOI18N
+        jLabel1.setText("FUNCIONARIO PESQUISA");
 
         acs_jBtnexcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-lixo-20.png"))); // NOI18N
         acs_jBtnexcluir.setText("EXCLUIR");
@@ -107,21 +114,20 @@ public class AcsTelaFuncionario extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(acs_jBtnincluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(acs_jBtnalterar)
-                                .addGap(61, 61, 61)
-                                .addComponent(acs_jBtnexcluir))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(acs_jBtnincluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(acs_jBtnalterar)
+                        .addGap(61, 61, 61)
+                        .addComponent(acs_jBtnexcluir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +147,15 @@ public class AcsTelaFuncionario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acs_jBtnalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnalterarActionPerformed
-        // TODO add your handling code here:
+        acsTelaFuncionarioIA.setTitle("Alterar");
+        
+        
+        int sel = jTable1.getSelectedRow();
+        AcsFuncionario acsFuncionario = controleFuncionario.getBean(sel);
+        acsTelaFuncionarioIA.beanView(acsFuncionario);        
+        acsTelaFuncionarioIA.setVisible(true);
+        List lista = daoFuncionario.listAll();
+        controleFuncionario.setList(lista);
     }//GEN-LAST:event_acs_jBtnalterarActionPerformed
 
     private void acs_jBtnincluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acs_jBtnincluirActionPerformed
@@ -149,6 +163,8 @@ public class AcsTelaFuncionario extends javax.swing.JDialog {
         
         acsTelaFuncionarioIA.setTitle("Incluir");
         acsTelaFuncionarioIA.setVisible(true);  
+        List lista = daoFuncionario.listAll();
+        controleFuncionario.setList(lista);
         
     }//GEN-LAST:event_acs_jBtnincluirActionPerformed
 

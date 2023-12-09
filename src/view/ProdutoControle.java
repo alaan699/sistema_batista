@@ -18,6 +18,7 @@ public class ProdutoControle extends AbstractTableModel {
     
     public void setList(List lista) {
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     
     public AcsProduto getBean(int linha) {
@@ -44,7 +45,7 @@ public class ProdutoControle extends AbstractTableModel {
             return produto.getAcsNome();
         }
         if (columnIndex == 2) {
-            return produto.getAcsAvaliacao();
+            return produto.getAcsPeso();
         }
         if (columnIndex == 3) {
             return produto.getAcsPreco();
@@ -61,7 +62,7 @@ public class ProdutoControle extends AbstractTableModel {
             return "Nome";
         }
         if (columnIndex == 2) {
-            return "Avaliação";
+            return "Peso";
         }
         if (columnIndex == 3) {
             return "Preço";

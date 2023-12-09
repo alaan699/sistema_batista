@@ -1,10 +1,15 @@
 package bean;
-// Generated 18/09/2023 17:08:34 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:14:48 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,23 +23,23 @@ public class AcsVendasProduto  implements java.io.Serializable {
 
 
      private int acsIdvendasProduto;
-     private int acsVendas;
-     private int acsProduto;
+     private AcsProduto acsProduto;
+     private AcsVendas acsVendas;
      private String acsQuantidade;
      private double acsValorUnitario;
 
     public AcsVendasProduto() {
     }
 
-    public AcsVendasProduto(int acsIdvendasProduto, int acsVendas, int acsProduto, String acsQuantidade, double acsValorUnitario) {
+    public AcsVendasProduto(int acsIdvendasProduto, AcsProduto acsProduto, AcsVendas acsVendas, String acsQuantidade, double acsValorUnitario) {
        this.acsIdvendasProduto = acsIdvendasProduto;
-       this.acsVendas = acsVendas;
        this.acsProduto = acsProduto;
+       this.acsVendas = acsVendas;
        this.acsQuantidade = acsQuantidade;
        this.acsValorUnitario = acsValorUnitario;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="acs_idvendas_produto", unique=true, nullable=false)
@@ -46,24 +51,24 @@ public class AcsVendasProduto  implements java.io.Serializable {
         this.acsIdvendasProduto = acsIdvendasProduto;
     }
 
-    
-    @Column(name="acs_vendas", nullable=false)
-    public int getAcsVendas() {
-        return this.acsVendas;
-    }
-    
-    public void setAcsVendas(int acsVendas) {
-        this.acsVendas = acsVendas;
-    }
-
-    
-    @Column(name="acs_produto", nullable=false)
-    public int getAcsProduto() {
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="acs_produto", nullable=false)
+    public AcsProduto getAcsProduto() {
         return this.acsProduto;
     }
     
-    public void setAcsProduto(int acsProduto) {
+    public void setAcsProduto(AcsProduto acsProduto) {
         this.acsProduto = acsProduto;
+    }
+
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="acs_vendas", nullable=false)
+    public AcsVendas getAcsVendas() {
+        return this.acsVendas;
+    }
+    
+    public void setAcsVendas(AcsVendas acsVendas) {
+        this.acsVendas = acsVendas;
     }
 
     

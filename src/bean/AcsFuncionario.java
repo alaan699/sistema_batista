@@ -1,10 +1,14 @@
 package bean;
-// Generated 18/09/2023 17:08:34 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 16:14:48 by Hibernate Tools 4.3.1
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +30,15 @@ public class AcsFuncionario  implements java.io.Serializable {
     public AcsFuncionario() {
     }
 
+	
     public AcsFuncionario(int acsIdfuncionario, String acsNome, String acsFuncao, String acsCpf, String acsEndereco) {
+        this.acsIdfuncionario = acsIdfuncionario;
+        this.acsNome = acsNome;
+        this.acsFuncao = acsFuncao;
+        this.acsCpf = acsCpf;
+        this.acsEndereco = acsEndereco;
+    }
+    public AcsFuncionario(int acsIdfuncionario, String acsNome, String acsFuncao, String acsCpf, String acsEndereco, Set acsVendases) {
        this.acsIdfuncionario = acsIdfuncionario;
        this.acsNome = acsNome;
        this.acsFuncao = acsFuncao;
@@ -85,9 +97,20 @@ public class AcsFuncionario  implements java.io.Serializable {
     public void setAcsEndereco(String acsEndereco) {
         this.acsEndereco = acsEndereco;
     }
-
-
-
+            @Override
+     public String toString() {
+    return acsNome;
+}
+    
+         @Override
+      public boolean equals (Object object){
+      if(object instanceof AcsFuncionario){
+      AcsFuncionario acsFuncionario = (AcsFuncionario) object;
+        if(this.getAcsIdfuncionario()== acsFuncionario.getAcsIdfuncionario())
+            return true;
+                }         
+                return false;
+      }
 
 }
 
